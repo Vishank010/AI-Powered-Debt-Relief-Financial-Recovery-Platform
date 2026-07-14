@@ -10,20 +10,35 @@ This folder contains the complete source code for the **AI Powered Debt Relief
 - **AI Integration:** Google Gemini API (with rule-based fallback)
 - **Auth:** JWT-based authentication with bcrypt password hashing
 
-## Folder Structure
-backend/
-├── main.py              # FastAPI entrypoint
-├── models.py             # Database models (ER diagram)
-├── schemas.py             # Pydantic request/response schemas
-├── auth.py                # JWT auth + password hashing
-├── routers/               # API endpoints (auth, loans, financial, settlement, negotiation, history)
-└── services/              # Financial engine, settlement engine, Gemini integration, negotiation engine
-frontend/
-├── src/
-│   ├── pages/             # Login, Register, Dashboard, Loans, Settlement, Negotiation, History
-│   ├── components/        # Navbar, StatCard, ProtectedRoute
-│   ├── context/           # AuthContext (JWT + user state)
-│   └── api/client.js      # Axios instance with auth interceptor
+finrelief-ai/
+├── backend/
+│   ├── main.py                  # FastAPI app entrypoint
+│   ├── database.py              # SQLAlchemy engine/session
+│   ├── models.py                # DB models (matches ER diagram)
+│   ├── schemas.py                # Pydantic request/response schemas
+│   ├── auth.py                   # JWT auth + password hashing
+│   ├── requirements.txt
+│   ├── .env.example
+│   ├── routers/
+│   │   ├── auth_router.py
+│   │   ├── loans_router.py
+│   │   ├── financial_router.py
+│   │   ├── settlement_router.py
+│   │   ├── negotiation_router.py
+│   │   └── history_router.py
+│   └── services/
+│       ├── financial_engine.py       # EMI/DTI/stress calculations
+│       ├── settlement_engine.py      # Settlement % prediction
+│       ├── gemini_service.py         # Google Gemini API wrapper
+│       └── negotiation_engine.py     # AI letter generator + fallback
+└── frontend/
+    ├── src/
+    │   ├── pages/            # Login, Register, Dashboard, Loans, Settlement, Negotiation, History
+    │   ├── components/       # Navbar, StatCard, ProtectedRoute
+    │   ├── context/          # AuthContext (JWT + user state)
+    │   └── api/client.js     # Axios instance with auth interceptor
+    ├── package.json
+    └── vite.config.js
 
 ## Key Features
 - Secure user registration & login
